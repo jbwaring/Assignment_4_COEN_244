@@ -1,4 +1,4 @@
-CPP = time.cpp date.cpp
+CPP = time.cpp date.cpp person.cpp doctor.cpp
 
 all:main
 
