@@ -12,15 +12,19 @@ using namespace std;
 	}
 
 	Time::Time(const Time &t){
-		time = t.time;
+		time[0] = t.time[0];
+		time[1] = t.time[1];
+		time[2] = t.time[2];
 	}
-	void Time::get_time(const Time &t, unsigned int* ptr){
-		ptr[0] = t.time[0];
-		ptr[1] = t.time[1];
-		ptr[2] = t.time[2];
+	
+	vector<int> Time::get_time(){
+		vector<int> retime;
+		retime.push_back(time[0]);
+		retime.push_back(time[1]);
+		retime.push_back(time[2]);
+		return retime;
 	}
 
-	void Time::print_time(unsigned int* time){
-
-		cout << time[0]<< ":" << time[1]<< ":" << time[2];
+	void Time::print_time(){
+		cout << endl << time[0]<< ":" << time[1] << ":" << time[2];
 	}

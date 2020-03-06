@@ -10,14 +10,9 @@ using namespace std;
 int main(){
 
 Time t1(23,53,56);
-
-unsigned int* time;
-time = (unsigned int *)malloc(sizeof(unsigned int) * 3);
-Time::get_time(t1, time);
-
-Time::print_time(time);
-cout << endl;
-
-
+Date d1;
+d1.print_date();
+vector<int> date_vec = d1.get_date();
+cout << endl << date_vec[0] << date_vec[1] << date_vec[2];
 return 0;
 }

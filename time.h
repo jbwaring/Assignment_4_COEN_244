@@ -5,17 +5,17 @@
 
 #ifndef TIME_H
 #define TIME_H 
-
+using namespace std;
 class Time{
 private:
-	int* time;
+	int time[];
 public:
 
 	Time();
 	Time(int hour, int min, int sec);
 	Time(const Time &t);
-	static void get_time(const Time &t, unsigned int* ptr);
-	static void print_time(unsigned int* time);
+	vector<int> get_time();
+	void print_time();
 };
 
 

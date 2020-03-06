@@ -5,17 +5,17 @@
 
 #ifndef DATE_H
 #define DATE_H 
-
+using namespace std;
 class Date{
 private:
-	int* date;
+	int date[];
 public:
 
 	Date();
 	Date(int hour, int min, int sec);
 	Date(const Date &t);
-	static void get_date(const Date &t, unsigned int* ptr);
-	static void print_date(unsigned int* date);
+	vector<int> get_date();
+	void print_date();
 };
 
 
