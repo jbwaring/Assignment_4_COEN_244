@@ -8,14 +8,13 @@
 using namespace std;
 class Time{
 private:
-	int time[];
+	int time_array[];
 public:
 
 	Time();
 	Time(int hour, int min, int sec);
 	Time(const Time &t);
-	vector<int> get_time();
-	void print_time();
+	int get_time(int i);
 };
 
 
