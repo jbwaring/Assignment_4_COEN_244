@@ -1,13 +1,10 @@
-#include <iostream>
-#include <string>
-#include <vector>
-#include <array>
+#pragma once
 #include "./person.h"
 #include "./date.h"
-#include "./time.h"
 #include "./bed.h"
 #ifndef INPATIENT_H
 #define INPATIENT_H 
+
 using namespace std;
 
 class inPatient : public Person 
@@ -22,6 +19,7 @@ int service, cond_no;
 public:
 
 	inPatient(string fname, string mname, string lname, int sin, int cond, int serv, Date &d);
+	inPatient(inPatient* ptr);
 	void get_profile(vector<string> &ans);
 
 // make destructor delete pointers of "private:" !!

@@ -1,10 +1,6 @@
-#include <iostream>
-#include <string>
-#include <vector>
-#include <array>
+#pragma once
 #include "./person.h"
 #include "./date.h"
-#include "./time.h"
 #include "./doctor.h"
 #include "./bed.h"
 #ifndef OUTPATIENT_H
@@ -12,7 +8,7 @@
 using namespace std;
 
 
-class outPatient
+class outPatient : public Person
 {
 
 private:
@@ -22,8 +18,8 @@ double h_charge;
 
 public:
 
-	outPatient();
-
+	outPatient(string fname, string mname, string lname, int sin, Date &apt, Doctor &prvd, double chrg);
+	outPatient(outPatient* pt);
 
 
 };

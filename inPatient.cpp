@@ -3,10 +3,15 @@ using namespace std;
 
 inPatient::inPatient(string fname, string mname, string lname, int sin, int cond, int serv, Date &d):Person(fname, lname, mname, sin){
 			cond_no = cond;
-			int service = serv;
+			service = serv;
 			adm_date = new Date(d);
 		}
+inPatient::inPatient(inPatient* ptr):Person(ptr->fname, ptr->lname, ptr->mname, ptr->get_sint()){
+			cond_no = ptr->cond_no;
+			service = ptr->service;
+			adm_date = new Date(ptr->adm_date);
 
+}
 void inPatient::get_profile(vector<string> &ans){
 			ans.clear();
 			ans.push_back(fname);

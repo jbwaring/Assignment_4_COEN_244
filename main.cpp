@@ -3,14 +3,12 @@
 #include <string>
 #include <vector>
 #include <array>
-#include "./time.h"
-#include "./date.h"
-#include "./person.h"
 #include "./doctor.h"
 #include "./inPatient.h"
-#include "./jb_base.h"
-#include "./bed.h"
 #include "./outPatient.h"
+#include "./hospital.h"
+#include "./jb_base.h"
+
 using namespace std;
 int main(){
 Time t(12,23,45);
@@ -25,6 +23,8 @@ hello->get_profile(personProfile);
 for(size_t i = 0; i < personProfile.size(); i ++)
 	cout << endl << personProfile[i];
 endl();
+
+Hospital H1;
 return 0;
 
 }

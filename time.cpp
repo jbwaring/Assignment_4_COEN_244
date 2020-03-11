@@ -1,5 +1,4 @@
 #include "./time.h"
-using namespace std;
 	Time::Time(){
 		time_array[0]=0;
 		time_array[1]=0;

@@ -7,6 +7,9 @@ using namespace std;
 		mname = m; 
 		sin = s;
 	}
+	int Person::get_sint(){
+		return sin;
+	}
 
 	/*int Person::get_sin(){
 		return sin;

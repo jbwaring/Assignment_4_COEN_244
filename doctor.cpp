@@ -22,3 +22,8 @@ using namespace std;
 			ans.push_back(license_no);
 			ans.back().insert(0, "Medical License Number:  ").append("\n");
 		}
+
+		Doctor::Doctor(Doctor* d):Person(d->fname, d->lname, d->mname, d->get_sint()){
+
+
+		}

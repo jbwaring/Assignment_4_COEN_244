@@ -1,4 +1,5 @@
 #include "./date.h"
+#include <iostream>
 using namespace std;
 	Date::Date(){ //Default Date; January 24th 1984, presentation of the first Macintosh Computer.
 		date = new int[3];
@@ -36,6 +37,22 @@ using namespace std;
 		date[0] = d.date[0];
 		date[1] = d.date[1];
 		date[2] = d.date[2];
+		long_date=false;
+		}
+	}
+
+		Date::Date(const Date* d){ 
+	date = new int[3];			// Copy constructor for the date class.
+		if(d->long_date==true){
+		date[0] = d->date[0];
+		date[1] = d->date[1];
+		date[2] = d->date[2];
+		t = new Time(d->t->get_time(0),d->t->get_time(1),d->t->get_time(2));
+		long_date=true;} 
+		else{
+		date[0] = d->date[0];
+		date[1] = d->date[1];
+		date[2] = d->date[2];
 		long_date=false;
 		}
 	}
