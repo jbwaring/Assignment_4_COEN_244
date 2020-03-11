@@ -9,6 +9,8 @@
 #include "./doctor.h"
 #include "./inPatient.h"
 #include "./jb_base.h"
+#include "./bed.h"
+#include "./outPatient.h"
 using namespace std;
 int main(){
 Time t(12,23,45);
@@ -22,6 +24,7 @@ hello->get_profile(personProfile);
 
 for(size_t i = 0; i < personProfile.size(); i ++)
 	cout << endl << personProfile[i];
+endl();
 return 0;
 
 }

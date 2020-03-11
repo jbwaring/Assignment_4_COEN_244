@@ -1,6 +1,6 @@
-CPP = time.cpp date.cpp person.cpp doctor.cpp inPatient.cpp
+CPP = time.cpp date.cpp person.cpp doctor.cpp inPatient.cpp bed.cpp outPatient.cpp
 
 all:main
 
 main:
-	g++ -o out_exe main.cpp $(CPP)
+	g++ -v  -o out_exe main.cpp $(CPP)
