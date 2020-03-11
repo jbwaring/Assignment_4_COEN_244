@@ -17,7 +17,7 @@ Date d2(2345,3,30);
 Date d(d2);
 vector<string> personProfile;
 inPatient* hello;
-hello = new inPatient("test", "test", "test", 123456789, 1, 1, d1);
+hello = new inPatient("test", "test", "test", 123456789, 1, 1, d2);
 hello->get_profile(personProfile);
 
 for(size_t i = 0; i < personProfile.size(); i ++)
@@ -25,6 +25,10 @@ for(size_t i = 0; i < personProfile.size(); i ++)
 endl();
 
 Hospital H1;
-return 0;
+/*vector<string> bed_serials;  // BED SERIAL NUMBER PRINTERS
+H1.get_bed_serials(bed_serials);
+for(size_t i = 0; i < bed_serials.size(); i ++)
+	cout << endl << bed_serials[i];*/
+
 
 }

@@ -2,8 +2,20 @@
 
 
 
-Bed::Bed(){
+Bed::Bed(string ser, bool av){
 	
+serial = ser;
+available = av;
+	
+}
 
-	
+Bed::Bed(Bed* b){
+
+	serial = b->serial;
+	available = b->available;
+}
+
+string Bed::get_serial(){
+
+	return serial;
 }

@@ -9,6 +9,7 @@
 
 class Hospital
 {
+	friend class Bed; //(to get serial # generator.)
 private:
 vector<inPatient> in_pt;
 vector<outPatient> out_pt;
@@ -19,6 +20,6 @@ public:
 	Hospital();
 	void add_inPT(inPatient* inptr);
 	void add_outPT(outPatient* inptr);
-
+	void get_bed_serials(vector<string> &s);
 };
 #endif
