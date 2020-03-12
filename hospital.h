@@ -11,12 +11,12 @@ class Hospital
 {
 	friend class Bed; //(to get serial # generator.)
 private:
+
+
+public:
 vector<inPatient> in_pt;
 vector<outPatient> out_pt;
 vector<Bed> bed_ls;
-
-public:
-
 	Hospital();
 	void add_inPT(inPatient* inptr);
 	void add_outPT(outPatient* inptr);
