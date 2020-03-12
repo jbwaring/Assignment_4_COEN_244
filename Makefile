@@ -3,4 +3,4 @@ CPP = time.cpp date.cpp person.cpp doctor.cpp inPatient.cpp bed.cpp outPatient.c
 all:main
 
 main:
-	g++ -o out_exe main.cpp $(CPP)
+	g++ -std=c++17 -ldialog -lncurses -o out_exe main.cpp $(CPP)

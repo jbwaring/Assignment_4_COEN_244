@@ -13,8 +13,6 @@ string license_no;
 float h_pay;
 Person* p_ptr;
 string specty;
-vector<inPatient> in_ls;
-//vector<outPatient> out_l;
 protected:
 
 public:

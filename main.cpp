@@ -1,4 +1,4 @@
-
+#include <dialog.h>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -10,25 +10,40 @@
 #include "./jb_base.h"
 
 using namespace std;
+int main_menu();
 int main(){
-Time t(12,23,45);
-Date d1(2020,12,4,23,56,7);
-Date d2(2345,3,30);
-Date d(d2);
-vector<string> personProfile;
-inPatient* hello;
-hello = new inPatient("test", "test", "test", 123456789, 1, 1, d2);
-hello->get_profile(personProfile);
-
-for(size_t i = 0; i < personProfile.size(); i ++)
-	cout << endl << personProfile[i];
-endl();
-
 Hospital H1;
-/*vector<string> bed_serials;  // BED SERIAL NUMBER PRINTERS
-H1.get_bed_serials(bed_serials);
-for(size_t i = 0; i < bed_serials.size(); i ++)
-	cout << endl << bed_serials[i];*/
 
+int status;
+    init_dialog(stdin, stdout); // INITIAL SPLASH-SCREEN
+    status = dialog_yesno("Hospital Management System COEN 244","Do you wish to continue?", 0, 0);
+    end_dialog();
+  	system("clear");
+if(status==1)
+ 	return 0;
+//--------Create a Hospital--------//
+Hospital H;
+//--------Go to main menu--------//
+main_menu();
+	
+return 0;
 
+}
+
+int main_menu(){
+	int ans;
+	init_dialog(stdin, stdout);
+	// one contiguous block of 4 chars
+    char c[2][8]={
+        "option1",
+        "option2"
+      };
+
+    // use a smart pointer
+    std::unique_ptr<char*[]> param(new char*[2]);
+    param[0] = &c[0][0];
+    param[1] = &c[1][0];
+	ans = dialog_menu("Main Menu - Hospital Management System", "Select an option:", 100, 100, 50, 2, param.get());
+	end_dialog();
+	return ans;
 }
