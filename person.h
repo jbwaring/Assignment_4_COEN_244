@@ -19,6 +19,12 @@ public:
 	virtual void get_profile(){};
 	string get_sin();
 	int get_sint();
+	string get_fname(){
+		return fname;
+	}
+	string get_lname(){
+		return lname;
+	}
  };
 
 #endif

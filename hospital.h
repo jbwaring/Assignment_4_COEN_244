@@ -16,8 +16,10 @@ private:
 public:
 vector<inPatient> in_pt;
 vector<outPatient> out_pt;
+vector<Doctor> doc_pt;
 vector<Bed> bed_ls;
 	Hospital();
+	void add_doc(Doctor* inptr);
 	void add_inPT(inPatient* inptr);
 	void add_outPT(outPatient* inptr);
 	void get_bed_serials(vector<string> &s);

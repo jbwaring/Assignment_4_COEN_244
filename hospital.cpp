@@ -11,7 +11,11 @@ Hospital::Hospital(){
 
 }
 
+void Hospital::add_doc(Doctor* inptr){
+	doc_pt.push_back(new Doctor(inptr));
+	return;
 
+}
 void Hospital::add_inPT(inPatient* inptr){
 
 

@@ -20,7 +20,16 @@ public:
 		Doctor(string fname, string mname, string lname, int sin, string l_no);
 		void get_profile(vector<string> &ans);
 		Doctor(Doctor* d);
-
+		void get_license_no(string &s){
+			s.clear();
+			s = license_no;
+				}
+		void get_name(string &s){
+			s = fname;
+			s.append(" ");
+			s.append(lname);
+			cout << s;
+		}
 };
 
 #endif
