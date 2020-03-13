@@ -24,6 +24,9 @@ public:
 			s.clear();
 			s = license_no;
 				}
+		string get_license_no(){
+			return license_no;
+		}
 		void get_name(string &s){
 			s = fname;
 			s.append(" ");
