@@ -27,8 +27,13 @@ void outPatient::get_profile(vector<string> &ans){
 			ans.back().insert(0, "Last Name:               ");
 			ans.push_back(get_sin());
 			ans.back().insert(0, "Social Insurance Number: ");
-			//ans.push_back(hospital_services[service]);
-			//ans.back().insert(0, "Hospital Service:        ");
+			ans.push_back("Doctor:");
+			ans.push_back(prv_dr->get_fname());
+			ans.back().append(" ");
+			ans.back().append(prv_dr->get_lname());
+			ans.push_back("License No: ");
+			ans.back().append(prv_dr->get_license_no());
+
 			// Date Insertion:
 			/*if(apt_date->long_date==false){ //Date does not specify time of day
 				ans.push_back(to_string(apt_date->date[0]));

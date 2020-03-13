@@ -5,8 +5,9 @@
 #include "./doctor.h"
 using namespace std;
 
-		Doctor::Doctor(string fname, string mname, string lname, int sin, string l_no):Person(fname, lname, mname, sin){
+		Doctor::Doctor(string fname, string mname, string lname, int sin, string l_no, string spec):Person(fname, lname, mname, sin){
 			license_no = l_no;
+			specty = spec;
 			h_pay = 12.5; //FUCK YOU DOCTORS YOU GET PAID JUST LIKE EVERYONE ELSE!
 		}
 		void Doctor::get_profile(vector<string> &ans){
@@ -20,12 +21,16 @@ using namespace std;
 			ans.push_back(get_sin());
 			ans.back().insert(0, "Social Insurance Number: ");
 			ans.push_back(license_no);
-			ans.back().insert(0, "Medical License Number:  ").append("\n");
+			ans.back().insert(0, "Medical License Number:  ");
+			ans.push_back(specty);
+			ans.back().insert(0, "Specialty:               ");
+
 		}
 
 		Doctor::Doctor(Doctor* d):Person(d->fname, d->lname, d->mname, d->get_sint()){
 				license_no = d->license_no;
 			h_pay = d->h_pay;
+			specty = d->specty;
 
 		}
 

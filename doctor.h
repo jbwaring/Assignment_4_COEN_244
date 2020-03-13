@@ -17,7 +17,7 @@ protected:
 
 public:
 
-		Doctor(string fname, string mname, string lname, int sin, string l_no);
+		Doctor(string fname, string mname, string lname, int sin, string l_no, string spec);
 		void get_profile(vector<string> &ans);
 		Doctor(Doctor* d);
 		void get_license_no(string &s){
@@ -31,7 +31,10 @@ public:
 			s = fname;
 			s.append(" ");
 			s.append(lname);
-			cout << s;
+			
+		}
+		void get_spec(string &s){
+			s = specty;
 		}
 		vector<string> get_save();
 };
