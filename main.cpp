@@ -302,9 +302,23 @@ void patient_list_menu(){
 	end_dialog();
 	switch(ans_case){
 	case 1:
+		if(H1.in_pt.size()==0){
+			init_dialog(stdin, stdout); // INITIAL SPLASH-SCREEN
+    dialog_msgbox("No inPatients found!", "Returning to Main Menu.", 100, 100, 1);
+			  dialog_vars.input_result = NULL;
+    end_dialog();
+			main_menu();
+		}
 		inP_ls();
 		break;
 	case 2:
+	if(H1.out_pt.size()==0){
+			init_dialog(stdin, stdout); // INITIAL SPLASH-SCREEN
+    dialog_msgbox("No outPatients found!", "Returning to Main Menu.", 100, 100, 1);
+			  dialog_vars.input_result = NULL;
+    end_dialog();
+			main_menu();
+		}
 		outP_ls();
 		break;
 	default:
@@ -394,24 +408,25 @@ string cond = dialog_vars.input_result;
  	
  	dialog_inputbox("New outPatient", "Enter Appointment Date (DD/MM/YYYY):", 0, 0,NULL , 0);
 string date = dialog_vars.input_result;
- 	end_dialog();
- 	cout << "before 	outPatient* P1;";
- 	outPatient* P1;
- 	Date apt(2020,3,1);
- 	cout << "after 	outPatient* P1;";
- 	P1 = new outPatient(fname, mname, lname, stoi(sin), apt, H1.doc_pt[i], 12.5);
- 	H1.add_outPT(P1);
- 	string recap;
- 	vector<string> test_vec;
- 	 H1.out_pt[0].get_profile(test_vec);
- for(size_t i =0;i<test_vec.size(); i++){
- 	recap.append("\n");
- 	recap.append(test_vec[i]);
+ 	end_dialog();	
+ 	outPatient* INP1;
+ 	Date* d1;
+ 	d1 = new Date(2020,3,2);
+ 	INP1 = new outPatient(fname, mname, lname, stoi(sin), *d1, H1.doc_pt[i], 12.5);
+ 	H1.add_outPT(INP1);
+ 	
+ 	string rec;
+ 	vector<string> _vec;
+ 	 H1.out_pt.back().get_profile(_vec);
+ for(size_t i =0;i<_vec.size(); i++){
+ 	rec.append("\n");
+ 	rec.append(_vec[i]);
  }
 	init_dialog(stdin, stdout);
-	dialog_msgbox("New outPatient Successfully Added!", &recap[0], 100, 100, 1);
+	dialog_msgbox("New outPatient Successfully Added!", &rec[0], 100, 100, 1);
 	dialog_vars.input_result = NULL;
 	end_dialog();
+
 }
 void add_Doctor(){
 	init_dialog(stdin, stdout);

@@ -1,9 +1,9 @@
 #include "./outPatient.h"
 
 
-outPatient::outPatient(string fname, string mname, string lname, int sin, Date &apt, Doctor &prvd, double chrg):Person(fname, lname, mname, sin){
+outPatient::outPatient(string fname, string mname, string lname, int sin, Date &d, Doctor &prvd, double chrg):Person(fname, lname, mname, sin){
 	
-apt_date = new Date(apt);
+apt_date = new Date(d);;
 prv_dr = new Doctor(prvd);
 h_charge = chrg;
 
@@ -27,8 +27,8 @@ void outPatient::get_profile(vector<string> &ans){
 			ans.back().insert(0, "Last Name:               ");
 			ans.push_back(get_sin());
 			ans.back().insert(0, "Social Insurance Number: ");
-			ans.push_back(hospital_services[service]);
-			ans.back().insert(0, "Hospital Service:        ");
+			//ans.push_back(hospital_services[service]);
+			//ans.back().insert(0, "Hospital Service:        ");
 			// Date Insertion:
 			/*if(apt_date->long_date==false){ //Date does not specify time of day
 				ans.push_back(to_string(apt_date->date[0]));
