@@ -1,4 +1,4 @@
-CPP = time.cpp date.cpp person.cpp doctor.cpp inPatient.cpp bed.cpp outPatient.cpp hospital.cpp
+CPP = time.cpp date.cpp person.cpp doctor.cpp inPatient.cpp bed.cpp outPatient.cpp hospital.cpp IODaemon.cpp
 
 all:main
 

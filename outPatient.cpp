@@ -77,3 +77,12 @@ void outPatient::get_profile(vector<string> &ans){
 					ans.back().insert(0, "Admission Time:          ");
 			}*/
 }
+	vector<string> outPatient::get_save(){
+		vector<string> ans;
+			ans.push_back(fname);
+			ans.push_back(mname);
+			ans.push_back(lname);
+			ans.push_back(to_string(get_sint()));
+			ans.push_back(hospital_services[service]);
+			return ans;
+	}

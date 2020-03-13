@@ -33,6 +33,7 @@ public:
 			s.append(lname);
 			cout << s;
 		}
+		vector<string> get_save();
 };
 
 #endif

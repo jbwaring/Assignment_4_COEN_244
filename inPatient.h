@@ -21,7 +21,7 @@ public:
 	inPatient(string fname, string mname, string lname, int sin, int cond, int serv, Date &d);
 	inPatient(inPatient* ptr);
 	void get_profile(vector<string> &ans);
-
+	vector<string> get_save();
 // make destructor delete pointers of "private:" !!
 
 };

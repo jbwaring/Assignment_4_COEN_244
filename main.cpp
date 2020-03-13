@@ -9,7 +9,7 @@
 #include "./hospital.h"
 #include "./date.h"
 #include "./jb_base.h"
-
+#include "./IODaemon.h"
 using namespace std;
 int main_menu();
 string select_doctor();
@@ -17,6 +17,8 @@ void patient_profile(bool ext, string name );
 void outP_ls();
 Hospital H1;
 int main(){
+	IODaemon daemon("data.txt");
+
 	Doctor* d1;
 	Doctor* d2;
 	Doctor* d3;
@@ -28,7 +30,7 @@ int main(){
 	H1.add_doc(d1);
 	H1.add_doc(d2);
 	H1.add_doc(d3);
-
+	daemon.save(H1);
 int status;
     init_dialog(stdin, stdout); // INITIAL SPLASH-SCREEN
     status = dialog_yesno("Hospital Management System COEN 244","Do you wish to continue?", 0, 0);

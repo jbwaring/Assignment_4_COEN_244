@@ -74,3 +74,62 @@ void inPatient::get_profile(vector<string> &ans){
 					ans.back().insert(0, "Admission Time:          ");
 			}
 }
+vector<string> inPatient::get_save(){
+vector<string> ans;
+			ans.push_back(fname);
+			ans.push_back(mname);
+			ans.push_back(lname);
+			ans.push_back(to_string(get_sint()));
+			ans.push_back(hospital_services[service]);
+			ans.push_back(to_string(cond_no));
+			// Date Insertion:
+			if(adm_date->long_date==false){ //Date does not specify time of day
+				ans.push_back(to_string(adm_date->date[0]));
+				ans.back().append("/");
+					if(adm_date->date[1]<10){
+						ans.back().append("0").append(to_string(adm_date->date[1]));
+					}else{
+						ans.back().append(to_string(adm_date->date[1]));
+					}
+						ans.back().append("/");
+							if(adm_date->date[2]<10){
+								ans.back().append("0").append(to_string(adm_date->date[2]));
+							}else{
+								ans.back().append(to_string(adm_date->date[2]));
+							}			
+					
+			}else{
+				ans.push_back(to_string(adm_date->date[0]));
+				ans.back().append("/");
+					if(adm_date->date[1]<10){
+						ans.back().append("0").append(to_string(adm_date->date[1]));
+					}else{
+						ans.back().append(to_string(adm_date->date[1]));
+					}
+						ans.back().append("/");
+							if(adm_date->date[2]<10){
+								ans.back().append("0").append(to_string(adm_date->date[2]));
+							}else{
+								ans.back().append(to_string(adm_date->date[2]));
+							}			
+					
+
+					ans.push_back(to_string(adm_date->t->get_time(0)));
+				ans.back().append(":");
+					if(adm_date->t->get_time(1)<10){
+						ans.back().append(":").append(to_string(adm_date->t->get_time(1)));
+					}else{
+						ans.back().append(to_string(adm_date->t->get_time(1)));
+					}
+						ans.back().append(":");
+							if(adm_date->t->get_time(2)<10){
+								ans.back().append("0").append(to_string(adm_date->t->get_time(2)));
+							}else{
+								ans.back().append(to_string(adm_date->t->get_time(2)));
+							}			
+				
+			}
+
+			return ans;
+
+}

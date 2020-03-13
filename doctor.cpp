@@ -28,3 +28,15 @@ using namespace std;
 			h_pay = d->h_pay;
 
 		}
+
+		vector<string> Doctor::get_save(){
+			vector<string> ans;
+
+			ans.push_back(fname);
+			ans.push_back(mname);
+			ans.push_back(lname);
+			ans.push_back(to_string(get_sint()));
+			ans.push_back(license_no);
+			return ans;
+
+		}
