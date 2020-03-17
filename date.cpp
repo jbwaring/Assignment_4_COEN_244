@@ -24,6 +24,44 @@ using namespace std;
 		long_date = false;
 
 	}
+	Date::Date(string dt){ //create date object from user prompted string in "DD/MM/YYYY" format.
+		string buffer="1";
+		buffer.clear();
+		
+		for(int itr=0; itr<2; itr++){
+			buffer.append(1,dt[itr]);
+		}
+		
+		
+		int d = stoi(buffer);
+
+		buffer.clear();
+
+		for(int itr=3; itr<5; itr++){
+			buffer.append(1,dt[itr]);
+			
+		}
+	
+
+		int mo = stoi(buffer);
+	buffer.clear();
+
+		for(int itr=6; itr<10; itr++){
+			buffer.append(1,dt[itr]);
+		
+		}
+	
+		int y = stoi(buffer);
+
+		date = new int[3];
+		date[0]= y  ;
+		date[1]= ( mo >= 0 && mo<  13) ? mo : 0;  
+		date[2]= ( d >= 0 && d < 32 ) ? d : 0;  
+		long_date = false;
+
+}
+
+
 
 	Date::Date(const Date &d){ 
 	date = new int[3];			// Copy constructor for the date class.
@@ -85,5 +123,15 @@ using namespace std;
 		cout << endl << date[0]<< "/" ;
 		if(date[1]<10){cout << 0 << date[1]<<"/";}else{cout << date[1]<<"/";}
 		if(date[2]<10){cout << 0 << date[2];}else{cout << date[2];}
+	}
+
+	int Date::get_day(){
+		return date[2];
+	}
+	int Date::get_month(){
+		return date[1];
+	}
+	int Date::get_year(){
+		return date[0];
 	}
 

@@ -27,6 +27,23 @@ void outPatient::get_profile(vector<string> &ans){
 			ans.back().insert(0, "Last Name:               ");
 			ans.push_back(get_sin());
 			ans.back().insert(0, "Social Insurance Number: ");
+			//APT DATE:
+			ans.push_back(to_string(apt_date->get_year()));
+				ans.back().append("/");
+					if(apt_date->get_month()<10){
+						ans.back().append("0").append(to_string(apt_date->get_month()));
+					}else{
+						ans.back().append(to_string(apt_date->get_month()));
+					}
+						ans.back().append("/");
+							if(apt_date->get_day()<10){
+								ans.back().append("0").append(to_string(apt_date->get_day()));
+							}else{
+								ans.back().append(to_string(apt_date->get_day()));
+							}			
+					ans.back().insert(0, "Apointment Date:          ");
+
+
 			ans.push_back("Doctor:");
 			ans.push_back(prv_dr->get_fname());
 			ans.back().append(" ");
@@ -34,53 +51,8 @@ void outPatient::get_profile(vector<string> &ans){
 			ans.push_back("License No: ");
 			ans.back().append(prv_dr->get_license_no());
 
-			// Date Insertion:
-			/*if(apt_date->long_date==false){ //Date does not specify time of day
-				ans.push_back(to_string(apt_date->date[0]));
-				ans.back().append("/");
-					if(apt_date->date[1]<10){
-						ans.back().append("0").append(to_string(apt_date->date[1]));
-					}else{
-						ans.back().append(to_string(apt_date->date[1]));
-					}
-						ans.back().append("/");
-							if(apt_date->date[2]<10){
-								ans.back().append("0").append(to_string(apt_date->date[2]));
-							}else{
-								ans.back().append(to_string(apt_date->date[2]));
-							}			
-					ans.back().insert(0, "Admission Date:          ");
-			}else{
-				ans.push_back(to_string(apt_date->date[0]));
-				ans.back().append("/");
-					if(apt_date->date[1]<10){
-						ans.back().append("0").append(to_string(apt_date->date[1]));
-					}else{
-						ans.back().append(to_string(apt_date->date[1]));
-					}
-						ans.back().append("/");
-							if(apt_date->date[2]<10){
-								ans.back().append("0").append(to_string(apt_date->date[2]));
-							}else{
-								ans.back().append(to_string(apt_date->date[2]));
-							}			
-					ans.back().insert(0, "Admission Date:          ");
-
-					ans.push_back(to_string(apt_date->t->get_time(0)));
-				ans.back().append(":");
-					if(apt_date->t->get_time(1)<10){
-						ans.back().append(":").append(to_string(apt_date->t->get_time(1)));
-					}else{
-						ans.back().append(to_string(apt_date->t->get_time(1)));
-					}
-						ans.back().append(":");
-							if(apt_date->t->get_time(2)<10){
-								ans.back().append("0").append(to_string(apt_date->t->get_time(2)));
-							}else{
-								ans.back().append(to_string(apt_date->t->get_time(2)));
-							}			
-					ans.back().insert(0, "Admission Time:          ");
-			}*/
+			
+				
 }
 	vector<string> outPatient::get_save(){
 		vector<string> ans;

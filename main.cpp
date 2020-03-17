@@ -10,7 +10,6 @@
 #include "./date.h"
 #include "./jb_base.h"
 #include "./IODaemon.h"
-#include "./account.h"
 using namespace std;
 int main_menu();
 string select_doctor();
@@ -319,9 +318,9 @@ if(ext == false){ //inPatient Profile Printing
 	}
 
 string recap;
- 	recap = "account sum is 2020CAD";
+ 	recap = "plein de money sa mere";
 	init_dialog(stdin, stdout);
-	dialog_msgbox("Patient File:", &recap[0], 100, 100, 1);
+	dialog_msgbox("Patient Account Balance:", &recap[0], 100, 100, 1);
 	end_dialog();
 
 	dialog_vars.input_result = NULL;
@@ -346,7 +345,7 @@ if(ext == true){ //outPatient Profile Printing
 string recap;
  	recap = "account sum is 2020CAD";
 	init_dialog(stdin, stdout);
-	dialog_msgbox("Patient File:", &recap[0], 100, 100, 1);
+	dialog_msgbox("Patient Account Balance:", &recap[0], 100, 100, 1);
 	end_dialog();
 
 	dialog_vars.input_result = NULL;
@@ -484,10 +483,20 @@ string serv = dialog_vars.input_result;
 string date = dialog_vars.input_result;
  	end_dialog();
 
+ 	dialog_inputbox("New inPatient", "Enter Release Date (DD/MM/YYYY):", 0, 0,NULL , 0);
+string r_date = dialog_vars.input_result;
+ 	end_dialog();
+
+ 	dialog_inputbox("New inPatient", "Enter Daily Charge (CDN)", 0, 0,NULL , 0);
+string d_charge = dialog_vars.input_result;
+ 	end_dialog();
+
  	Date* d1;
- 	d1 = new Date(2020,3,2);
+ 	Date* d2;
+ 	d1 = new Date(date);
+ 	d2 = new Date(r_date);
  	inPatient* P1;
- 	P1=new inPatient(fname, mname, lname, stoi(sin), stoi(cond), stoi(serv), *d1);
+ 	P1=new inPatient(fname, mname, lname, stoi(sin), stoi(cond), stoi(serv), *d1, *d2, 22.5);
  	H1.add_inPT(P1);
  	string recap;
  	vector<string> test;
@@ -537,7 +546,7 @@ string date = dialog_vars.input_result;
  	end_dialog();	
  	outPatient* INP1;
  	Date* d1;
- 	d1 = new Date(2020,3,2);
+ 	d1 = new Date(date);
  	INP1 = new outPatient(fname, mname, lname, stoi(sin), *d1, H1.doc_pt[i], 12.5);
  	H1.add_outPT(INP1);
  	

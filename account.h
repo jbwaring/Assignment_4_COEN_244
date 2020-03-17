@@ -12,10 +12,10 @@ private:
 public:
 
 	Account();
+	Account(double t);
 	void pay_amount(double a);
-	void get_balance(double &d);
 	void add_charge(double d);
-
+	void get_balance(double &d);
 
 
 };

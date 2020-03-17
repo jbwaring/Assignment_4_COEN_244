@@ -17,8 +17,12 @@ public:
 	Date(int y, int mo, int d, int h, int mm, int s);
 	Date(const Date &d);
 	Date(const Date* d);
+	Date(string dt);
 	vector<int> get_date();
 	void print_date();
+	int get_day();
+	int get_month();
+	int get_year();
 	~Date();
 };
 
