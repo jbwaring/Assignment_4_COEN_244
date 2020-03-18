@@ -655,10 +655,13 @@ string cond = dialog_vars.input_result;
  	dialog_inputbox("New outPatient", "Enter Appointment Date (DD/MM/YYYY):", 0, 0,NULL , 0);
 string date = dialog_vars.input_result;
  	end_dialog();	
+ 	dialog_inputbox("New outPatient", "Set Appointment Fees:", 0, 0,NULL , 0);
+string apt_fees = dialog_vars.input_result;
+ 	end_dialog();	
  	outPatient* INP1;
  	Date* d1;
  	d1 = new Date(date);
- 	INP1 = new outPatient(fname, mname, lname, stoi(sin), *d1, H1.doc_pt[i], 12.5);
+ 	INP1 = new outPatient(fname, mname, lname, stoi(sin), *d1, H1.doc_pt[i], stod(apt_fees));
  	H1.add_outPT(INP1);
  	
  	string rec;
