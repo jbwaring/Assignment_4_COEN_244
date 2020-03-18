@@ -19,8 +19,10 @@ void patient_account(bool ext, string name);
 void outP_ls(bool getprofile);
 void account_menu(bool ext, int rank);
 Hospital H1;
+IODaemon io_daemon("data.txt");
+int Bed::counter=0;
 int main(){
-	IODaemon daemon("data.txt");
+	
 
 	Doctor* d1;
 	Doctor* d2;
@@ -33,7 +35,7 @@ int main(){
 	H1.add_doc(d1);
 	H1.add_doc(d2);
 	H1.add_doc(d3);
-	daemon.save(H1);
+	io_daemon.save(H1);
 int status;
     init_dialog(stdin, stdout); // INITIAL SPLASH-SCREEN
     status = dialog_yesno("Hospital Management System COEN 244","Do you wish to continue?", 0, 0);
@@ -611,7 +613,7 @@ string d_charge = dialog_vars.input_result;
  	H1.add_inPT(P1);
  	string recap;
  	vector<string> test;
- 	 H1.in_pt[0].get_profile(test);
+ 	 H1.in_pt.back().get_profile(test);
  for(size_t i =0;i<test.size(); i++){
  	recap.append("\n");
  	recap.append(test[i]);}
@@ -720,7 +722,7 @@ string specty = dialog_vars.input_result;
 int main_menu(){
 	INIT:init_dialog(stdin, stdout);
 	// one contiguous block of 4 chars
-    char c[12][40]={
+    char c[14][40]={
         "1",
         "Add a new inPatient",
         "2",
@@ -732,11 +734,13 @@ int main_menu(){
         "5",
         "Doctor List",
         "6",
-        "Accounts"
+        "Accounts",
+        "7",
+        "Save Current State"
       };
  	
     // use a smart pointer
-    char* param[12];
+    char* param[14];
     param[0] = &c[0][0];
     param[1] = &c[1][0];
     param[2] = &c[2][0];
@@ -749,9 +753,11 @@ int main_menu(){
     param[9] = &c[9][0];
     param[10] = &c[10][0];
     param[11] = &c[11][0];
+    param[12] = &c[12][0];
+    param[13] = &c[13][0]; 
     char** ptr = &param[0];
     dialog_vars.input_result = NULL;
-	dialog_menu("Main Menu - Hospital Management System", "Select an option: (you can use the mouse!)", 100, 100, 50, 6, ptr);
+	dialog_menu("Main Menu - Hospital Management System", "Select an option: (you can use the mouse!)", 100, 100, 50, 7, ptr);
 	string ans = dialog_vars.input_result;
 	int ans_case = stoi(ans);
 	end_dialog();
@@ -773,6 +779,10 @@ int main_menu(){
 		break;
 		case 6:
 		patient_list_menu(false);
+		break;
+		case 7:
+		io_daemon.save(H1);
+		break;
 		default:
 		break;
 

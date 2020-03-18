@@ -2,12 +2,13 @@
 
 Hospital::Hospital(){
 	
-	for(size_t i=0; i<500; i++){
+	/*for(size_t i=0; i<500; i++){
 		Bed* ptr;
+		string serial;
 		ptr = new Bed(Bed::bed_serial_generator(), true);
 		bed_ls.push_back(new Bed(ptr));
 		delete ptr;
-	}
+	}*/
 
 }
 
@@ -18,11 +19,14 @@ void Hospital::add_doc(Doctor* inptr){
 }
 void Hospital::add_inPT(inPatient* inptr){
 	string bed_serial;
-	for(size_t i=0; i<bed_ls.size(); i++){
-		if(bed_ls[i].is_available() == true){
-			bed_serial = bed_ls[i].get_serial();
-		}
-	}
+	int bed_rank = 0;
+	while(bed_ls[bed_rank].is_available() == false)
+		bed_rank++;
+
+			bed_serial = bed_ls[bed_rank].get_serial();
+			bed_ls[bed_rank].use();
+		
+	
 	in_pt.push_back( new inPatient(inptr));
 	in_pt.back().set_bed_serial(bed_serial);
 	return;
@@ -40,6 +44,6 @@ void Hospital::add_outPT(outPatient* inptr){
 
 void Hospital::get_bed_serials(vector<string> &s){
 	s.clear();
-	for(size_t i=0; i<bed_ls.size(); i++)
+	for(size_t i=0; i<500; i++)
 		s.push_back(bed_ls[i].get_serial());
 }

@@ -17,7 +17,7 @@ public:
 vector<inPatient> in_pt;
 vector<outPatient> out_pt;
 vector<Doctor> doc_pt;
-vector<Bed> bed_ls;
+Bed bed_ls[500];
 	Hospital();
 	void add_doc(Doctor* inptr);
 	void add_inPT(inPatient* inptr);

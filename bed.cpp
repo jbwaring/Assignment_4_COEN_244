@@ -22,5 +22,8 @@ string Bed::get_serial(){
 
 Bed::Bed(){
 	available = true;
-	serial = bed_serial_generator();
+	serial = BED_SER[counter];
+	counter ++;
 }
+
+

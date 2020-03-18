@@ -18,7 +18,6 @@ void IODaemon::save(Hospital &H1){ //CAUTION THIS CLEARS THE FILE BEFORE WRITING
 	file << "##INPLS##";
 	for(size_t i =0; i<H1.in_pt.size();i++){
 		file << "\n";
-		file << "\n";
 		file << "##" << i << "##";
 		vector<string> buff = H1.in_pt[i].get_save();
 		for(size_t j = 0; j<buff.size(); j++ ){
@@ -29,7 +28,6 @@ void IODaemon::save(Hospital &H1){ //CAUTION THIS CLEARS THE FILE BEFORE WRITING
 	file << "\n##OUTPLS##";
 
 	for(size_t i =0; i<H1.out_pt.size();i++){
-		file << "\n";
 		file << "\n";
 		file << "##" << i << "##";
 		vector<string> buff = H1.out_pt[i].get_save();
