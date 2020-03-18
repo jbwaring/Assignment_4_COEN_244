@@ -8,6 +8,7 @@
 #include "./outPatient.h"
 #include "./hospital.h"
 #include "./date.h"
+#include "./account.h"
 #include "./jb_base.h"
 #include "./IODaemon.h"
 using namespace std;
@@ -16,6 +17,7 @@ string select_doctor();
 void patient_profile(bool ext, string name );
 void patient_account(bool ext, string name);
 void outP_ls(bool getprofile);
+void account_menu(bool ext, int rank);
 Hospital H1;
 int main(){
 	IODaemon daemon("data.txt");
@@ -316,17 +318,7 @@ if(ext == false){ //inPatient Profile Printing
 
 		i++;
 	}
-
-string recap;
- 	recap = "plein de money sa mere";
-	init_dialog(stdin, stdout);
-	dialog_msgbox("Patient Account Balance:", &recap[0], 100, 100, 1);
-	end_dialog();
-
-	dialog_vars.input_result = NULL;
-	main_menu();
-
-
+	account_menu(false, i);
 }
 if(ext == true){ //outPatient Profile Printing
 	int i = 0;
@@ -342,18 +334,138 @@ if(ext == true){ //outPatient Profile Printing
 		i++;
 	}
 
-string recap;
- 	recap = "account sum is 2020CAD";
-	init_dialog(stdin, stdout);
-	dialog_msgbox("Patient Account Balance:", &recap[0], 100, 100, 1);
+	account_menu(true, i);
+	}
+}
+
+void account_menu(bool ext, int rank){
+if(ext==false){ // IN-PATIENT ACCOUNT MENU
+
+	char c[4][40]={
+        "1",
+        "Make Payment",
+        "2",
+        "Add Charge",
+      };
+ 	string title = "Patient Account: ";
+ 	title.append(H1.in_pt[rank].get_sin());
+    string current_charge = "Current Balance: ";
+    current_charge.append(H1.in_pt[rank].account->get_balance_str());
+    current_charge.append(" CDN.");
+    char* param[4];
+    param[0] = &c[0][0];
+    param[1] = &c[1][0];
+    param[2] = &c[2][0];
+    param[3] = &c[3][0];
+    char** ptr = &param[0];
+    dialog_vars.input_result = NULL;
+	dialog_menu(&title[0], &current_charge[0], 100, 100, 50, 2, ptr);
+	string ans = dialog_vars.input_result;
+	int ans_case = stoi(ans);
 	end_dialog();
+	switch(ans_case){
+		case 1: {// Make a payment
+		dialog_vars.input_result = NULL;
+		dialog_inputbox("Make A Payment", "Enter Sum: (CDN)", 0, 0,NULL , 0);
+		string sum = dialog_vars.input_result;
+ 		end_dialog();
+ 		double sum_paid = stod(sum);
+ 		H1.in_pt[rank].account->pay_amount(sum_paid);
+ 		string n_bal = "New Balance: ";
+ 		n_bal.append(H1.in_pt[rank].account->get_balance_str());
+ 		n_bal.append(" CDN.\nReturning to Main Menu.");
+		dialog_msgbox("Payment Accepted", &n_bal[0], 100, 100, 1);
+		end_dialog();
+		main_menu();
+		break;}
+		case 2: {// Add Charge --> note that a negative charge is a payment and a negative payment is a charge but I am implementing to show menus etc although same level of functionnality can be achieved using only one function.
+		string sum;
+		string n_bal;
+		dialog_vars.input_result = NULL;
+		dialog_inputbox("Add a Charge", "Enter Sum: (CDN)", 0, 0,NULL , 0);
+		sum = dialog_vars.input_result;
+ 		end_dialog();
+ 		double sum_paid = stod(sum);
+ 		H1.in_pt[rank].account->add_charge(sum_paid);
+ 		n_bal = "New Balance: ";
+ 		n_bal.append(H1.in_pt[rank].account->get_balance_str());
+ 		n_bal.append(" CDN.\nReturning to Main Menu.");
+		dialog_msgbox("Charge Added Successfully.", &n_bal[0], 100, 100, 1);
+		end_dialog();
+		main_menu();
+		break;}
+		default:
+			break;
+	}
 
-	dialog_vars.input_result = NULL;
-	main_menu();
 
 
 }
+if(ext==true){ // OUT-PATIENT ACCOUNT MENU
+
+	char c[4][40]={
+        "1",
+        "Make Payment",
+        "2",
+        "Add Charge",
+      };
+ 	string title = "Patient Account: ";
+ 	title.append(H1.out_pt[rank].get_sin());
+    string current_charge = "Current Balance: ";
+    current_charge.append(H1.out_pt[rank].account->get_balance_str());
+    current_charge.append(" CDN.");
+    char* param[4];
+    param[0] = &c[0][0];
+    param[1] = &c[1][0];
+    param[2] = &c[2][0];
+    param[3] = &c[3][0];
+    char** ptr = &param[0];
+    dialog_vars.input_result = NULL;
+	dialog_menu(&title[0], &current_charge[0], 100, 100, 50, 2, ptr);
+	string ans = dialog_vars.input_result;
+	int ans_case = stoi(ans);
+	end_dialog();
+	switch(ans_case){
+		case 1: {// Make a payment
+		dialog_vars.input_result = NULL;
+		dialog_inputbox("Make A Payment", "Enter Sum: (CDN)", 0, 0,NULL , 0);
+		string sum = dialog_vars.input_result;
+ 		end_dialog();
+ 		double sum_paid = stod(sum);
+ 		H1.out_pt[rank].account->pay_amount(sum_paid);
+ 		string n_bal = "New Balance: ";
+ 		n_bal.append(H1.out_pt[rank].account->get_balance_str());
+ 		n_bal.append(" CDN.\nReturning to Main Menu.");
+		dialog_msgbox("Payment Accepted", &n_bal[0], 100, 100, 1);
+		end_dialog();
+		main_menu();
+		break;}
+		case 2: {// Add Charge --> note that a negative charge is a payment and a negative payment is a charge but I am implementing to show menus etc although same level of functionnality can be achieved using only one function.
+		string sum;
+		string n_bal;
+		dialog_vars.input_result = NULL;
+		dialog_inputbox("Add a Charge", "Enter Sum: (CDN)", 0, 0,NULL , 0);
+		sum = dialog_vars.input_result;
+ 		end_dialog();
+ 		double sum_paid = stod(sum);
+ 		H1.out_pt[rank].account->add_charge(sum_paid);
+ 		n_bal = "New Balance: ";
+ 		n_bal.append(H1.out_pt[rank].account->get_balance_str());
+ 		n_bal.append(" CDN.\nReturning to Main Menu.");
+		dialog_msgbox("Charge Added Successfully.", &n_bal[0], 100, 100, 1);
+		end_dialog();
+		main_menu();
+		break;}
+		default:
+			break;
+	}
+
+
+
 }
+
+}
+
 void patient_list_menu(bool get_profile){
 if(get_profile==true){
 	char c[4][40]={
@@ -408,7 +520,6 @@ char c[4][40]={
         "outPatients Accounts",
       };
  	
-    // use a smart pointer
     char* param[4];
     param[0] = &c[0][0];
     param[1] = &c[1][0];
@@ -496,7 +607,7 @@ string d_charge = dialog_vars.input_result;
  	d1 = new Date(date);
  	d2 = new Date(r_date);
  	inPatient* P1;
- 	P1=new inPatient(fname, mname, lname, stoi(sin), stoi(cond), stoi(serv), *d1, *d2, 22.5);
+ 	P1=new inPatient(fname, mname, lname, stoi(sin), stoi(cond), stoi(serv), *d1, *d2, stod(d_charge));
  	H1.add_inPT(P1);
  	string recap;
  	vector<string> test;

@@ -5,7 +5,7 @@ outPatient::outPatient(string fname, string mname, string lname, int sin, Date &
 	
 apt_date = new Date(d);;
 prv_dr = new Doctor(prvd);
-h_charge = chrg;
+account = new Account(chrg);
 
 }
 
@@ -13,7 +13,7 @@ outPatient::outPatient(outPatient* pt):Person(pt->fname, pt->lname, pt->mname, p
 	
 apt_date = new Date(pt->apt_date);
 prv_dr = new Doctor(pt->prv_dr);
-h_charge = pt->h_charge;
+account = new Account(pt->account->get_balance());
 
 }
 

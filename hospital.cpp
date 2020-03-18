@@ -17,10 +17,14 @@ void Hospital::add_doc(Doctor* inptr){
 
 }
 void Hospital::add_inPT(inPatient* inptr){
-
-
+	string bed_serial;
+	for(size_t i=0; i<bed_ls.size(); i++){
+		if(bed_ls[i].is_available() == true){
+			bed_serial = bed_ls[i].get_serial();
+		}
+	}
 	in_pt.push_back( new inPatient(inptr));
-
+	in_pt.back().set_bed_serial(bed_serial);
 	return;
 
 }

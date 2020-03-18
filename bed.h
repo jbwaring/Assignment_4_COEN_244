@@ -11,9 +11,12 @@ private:
 string serial;
 bool available;
 public:
-
+	Bed();
 	Bed(string ser, bool av);
 	Bed(Bed* b);
+	bool is_available(){
+		return available;
+	}
 	static string bed_serial_generator(){
 
 	string ans;

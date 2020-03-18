@@ -25,6 +25,13 @@ using namespace std;
 
 	}
 	Date::Date(string dt){ //create date object from user prompted string in "DD/MM/YYYY" format.
+	if(dt==""){ // default date for faster menu testing
+		date = new int[3];
+		date[0]= 2020;
+		date[1]= 3; 
+		date[2]= 18;
+		long_date = false;
+	}else{
 		string buffer="1";
 		buffer.clear();
 		
@@ -58,7 +65,7 @@ using namespace std;
 		date[1]= ( mo >= 0 && mo<  13) ? mo : 0;  
 		date[2]= ( d >= 0 && d < 32 ) ? d : 0;  
 		long_date = false;
-
+}
 }
 
 

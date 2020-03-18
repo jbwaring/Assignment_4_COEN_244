@@ -14,10 +14,9 @@ class outPatient : public Person
 private:
 Date* apt_date;
 Doctor* prv_dr;
-double h_charge;
 
 public:
-
+	Account* account;
 	outPatient(string fname, string mname, string lname, int sin, Date &apt, Doctor &prvd, double chrg);
 	outPatient(outPatient* pt);
 	void get_profile(vector<string> &ans);

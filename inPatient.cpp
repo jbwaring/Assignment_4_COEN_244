@@ -6,14 +6,19 @@ inPatient::inPatient(string fname, string mname, string lname, int sin, int cond
 			service = serv;
 			adm_date = new Date(d1);
 			dis_date = new Date(d2);
-			t_balance = 22.22;
+			int no_year = dis_date->get_year()-adm_date->get_year();
+			int no_mo = dis_date->get_month()-adm_date->get_month();
+			int no_d = dis_date->get_day()-adm_date->get_day();
+			double charge = ((365*no_year)+(no_mo*31)+no_d)*d_charge;
+			account = new Account(charge);
+			
 		}
 inPatient::inPatient(inPatient* ptr):Person(ptr->fname, ptr->lname, ptr->mname, ptr->get_sint()){
 			cond_no = ptr->cond_no;
 			service = ptr->service;
 			adm_date = new Date(ptr->adm_date);
 			dis_date = new Date(ptr->dis_date);
-
+			account = new Account(ptr->account->get_balance());
 
 }
 void inPatient::get_profile(vector<string> &ans){
@@ -77,9 +82,12 @@ void inPatient::get_profile(vector<string> &ans){
 							}			
 					ans.back().insert(0, "Admission Time:          ");
 			}
-			ans.push_back(to_string(get_balance()));
-			ans.back().insert(0, "Balance:          ");
+
+			ans.push_back(account->get_balance_str());
+			        ans.back().insert(0, "Balance:                 ");
 			ans.back().append(" CDN");
+			ans.push_back(bed_serial);
+			        ans.back().insert(0, "Bed Serial #:            ");
 		
 }
 vector<string> inPatient::get_save(){
@@ -137,9 +145,12 @@ vector<string> ans;
 							}			
 				
 			}
-			ans.push_back(to_string(t_balance));
+			
+			ans.push_back(account->get_balance_str());
 			ans.back().insert(0, "Balance:          ");
 			ans.back().append(" CDN");
+			ans.push_back(bed_serial);
+			ans.back().insert(0, "Bed Serial #:          ");
 			return ans;
 
 }
@@ -149,15 +160,4 @@ double inPatient::compute_t_charge(double d_charge){
 	int no_d = dis_date->get_day()-adm_date->get_day();
 	double ans = ((365*no_year)+(no_mo*31)+no_d)*d_charge;
 	return ans;
-}
-
-void inPatient::pay_amount(double a){
-		t_balance = t_balance - a;
-}
-void inPatient::get_balance(double &d){
-		d = t_balance;
-
-}
-void inPatient::add_charge(double d){
-		t_balance = t_balance + d;
 }

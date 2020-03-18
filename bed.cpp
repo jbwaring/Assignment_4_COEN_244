@@ -19,3 +19,8 @@ string Bed::get_serial(){
 
 	return serial;
 }
+
+Bed::Bed(){
+	available = true;
+	serial = bed_serial_generator();
+}

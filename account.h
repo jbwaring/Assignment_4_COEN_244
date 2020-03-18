@@ -1,5 +1,8 @@
 #pragma once
-
+#include <iomanip>
+#include <iostream>
+#include <sstream>
+#include <string>
 #ifndef ACCOUNT_H
 #define ACCOUNT_H
 
@@ -16,7 +19,8 @@ public:
 	void pay_amount(double a);
 	void add_charge(double d);
 	void get_balance(double &d);
-
+	double get_balance();
+	std::string get_balance_str();
 
 };
 
