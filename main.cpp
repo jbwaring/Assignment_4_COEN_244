@@ -18,6 +18,9 @@ void patient_profile(bool ext, string name );
 void patient_account(bool ext, string name);
 void outP_ls(bool getprofile);
 void account_menu(bool ext, int rank);
+void del_inPT();
+void del_outPT();
+void delete_menu();
 Hospital H1;
 IODaemon io_daemon("data.txt");
 int Bed::counter=0;
@@ -36,7 +39,7 @@ int main(){
 	H1.add_doc(d2);
 	H1.add_doc(d3);
 	io_daemon.save(H1);
-int status;
+	int status;
     init_dialog(stdin, stdout); // INITIAL SPLASH-SCREEN
     status = dialog_yesno("Hospital Management System COEN 244","Do you wish to continue?", 0, 0);
     end_dialog();
@@ -677,7 +680,7 @@ string apt_fees = dialog_vars.input_result;
 	dialog_msgbox("New outPatient Successfully Added!", &rec[0], 100, 100, 1);
 	dialog_vars.input_result = NULL;
 	end_dialog();
-
+	main_menu();
 }
 void add_Doctor(){
 	init_dialog(stdin, stdout);
@@ -718,11 +721,13 @@ string specty = dialog_vars.input_result;
 	dialog_msgbox("New Doctor Successfully Added!", &recap[0], 100, 100, 1);
 	dialog_vars.input_result = NULL;
 	end_dialog();
+	main_menu();
 }
 int main_menu(){
 	INIT:init_dialog(stdin, stdout);
+	dialog_vars.input_result = NULL;
 	// one contiguous block of 4 chars
-    char c[14][40]={
+    char c[16][40]={
         "1",
         "Add a new inPatient",
         "2",
@@ -736,11 +741,13 @@ int main_menu(){
         "6",
         "Accounts",
         "7",
+        "Delete a File",
+        "8",
         "Save Current State"
       };
  	
     // use a smart pointer
-    char* param[14];
+    char* param[16];
     param[0] = &c[0][0];
     param[1] = &c[1][0];
     param[2] = &c[2][0];
@@ -755,9 +762,11 @@ int main_menu(){
     param[11] = &c[11][0];
     param[12] = &c[12][0];
     param[13] = &c[13][0]; 
+    param[14] = &c[14][0];
+    param[15] = &c[15][0];
     char** ptr = &param[0];
     dialog_vars.input_result = NULL;
-	dialog_menu("Main Menu - Hospital Management System", "Select an option: (you can use the mouse!)", 100, 100, 50, 7, ptr);
+	dialog_menu("Main Menu - Hospital Management System", "Select an option: (you can use the mouse!)", 100, 100, 50, 8, ptr);
 	string ans = dialog_vars.input_result;
 	int ans_case = stoi(ans);
 	end_dialog();
@@ -781,6 +790,9 @@ int main_menu(){
 		patient_list_menu(false);
 		break;
 		case 7:
+		delete_menu();
+		break;
+		case 8:
 		io_daemon.save(H1);
 		break;
 		default:
@@ -789,4 +801,145 @@ int main_menu(){
 	}
 	
 	return 0;
+}
+
+void delete_menu(){
+
+char c[4][40]={
+        "1",
+        "Remove an inPatient",
+        "2",
+        "Remove an outPatient",
+      };
+ 	
+    char* param[4];
+    param[0] = &c[0][0];
+    param[1] = &c[1][0];
+    param[2] = &c[2][0];
+    param[3] = &c[3][0];
+    char** ptr = &param[0];
+    dialog_vars.input_result = NULL;
+	dialog_menu("Patient Removal Menu", "Select an option:", 100, 100, 50, 2, ptr);
+	string ans = dialog_vars.input_result;
+	int ans_case = stoi(ans);
+	end_dialog();
+	switch(ans_case){
+		case 1:
+		del_inPT();
+		break;
+		case 2:
+		del_outPT();
+		break;
+		default:
+		break;
+	}
+
+}
+
+void del_inPT(){
+	if(H1.in_pt.size()==0){
+			init_dialog(stdin, stdout); // INITIAL SPLASH-SCREEN
+    dialog_msgbox("No inPatients found!", "Returning to Main Menu.", 100, 100, 1);
+			  dialog_vars.input_result = NULL;
+    end_dialog();
+			main_menu();
+		}
+	int docno = H1.in_pt.size();
+char c[2*docno][128];
+for(int i = 0; i<2*docno; i++){
+	for(int j = 0; j<128; j++)
+		c[i][j] = '\0';
+}
+	string s;
+	// PATIENTS NAMES //
+	int k = 0;
+	for(size_t j=0; j<2*docno; j++){
+	j++;
+	s = to_string(k);
+	k++;
+    for(size_t i = 0; i<s.length(); i++)
+    	c[j-1][i] = s[i];
+    }
+    // Get SIN No. // 
+    k = 0;
+	for(size_t j=1; j<2*docno; j++){
+		s.clear();
+	j++;
+	
+	s.clear();
+	s = H1.in_pt[k].get_fname();
+	s.append(" ");
+	s.append(H1.in_pt[k].get_lname());
+	k++;
+    for(size_t i = 0; i<s.length(); i++)
+    	c[j-1][i] = s[i];
+    }
+
+
+    char* param[2*docno];
+    for(size_t i = 0; i<2*docno; i++)
+    	param[i] = &c[i][0];
+
+    char** ptr = &param[0];
+    init_dialog(stdin, stdout);
+    dialog_vars.input_result = NULL;
+	dialog_menu("inPatient List Menu", "Select an entry to delete.", 100, 100, 50, docno, ptr);
+	end_dialog();
+	int del_rank = stoi(dialog_vars.input_result);
+	H1.in_pt.erase(H1.in_pt.begin()+del_rank);
+	main_menu();
+}
+
+void del_outPT(){
+	if(H1.out_pt.size()==0){
+			init_dialog(stdin, stdout); // INITIAL SPLASH-SCREEN
+    dialog_msgbox("No outPatients found!", "Returning to Main Menu.", 100, 100, 1);
+			  dialog_vars.input_result = NULL;
+    end_dialog();
+			main_menu();
+		}
+	int docno = H1.out_pt.size();
+char c[2*docno][128];
+for(int i = 0; i<2*docno; i++){
+	for(int j = 0; j<128; j++)
+		c[i][j] = '\0';
+}
+	string s;
+	// PATIENTS NAMES //
+	int k = 0;
+	for(size_t j=0; j<2*docno; j++){
+	j++;
+	s = to_string(k);
+	k++;
+    for(size_t i = 0; i<s.length(); i++)
+    	c[j-1][i] = s[i];
+    }
+    // Get SIN No. // 
+    k = 0;
+	for(size_t j=1; j<2*docno; j++){
+		s.clear();
+	j++;
+	
+	s.clear();
+	s = H1.out_pt[k].get_fname();
+	s.append(" ");
+	s.append(H1.out_pt[k].get_lname());
+	k++;
+    for(size_t i = 0; i<s.length(); i++)
+    	c[j-1][i] = s[i];
+    }
+
+
+    char* param[2*docno];
+    for(size_t i = 0; i<2*docno; i++)
+    	param[i] = &c[i][0];
+
+    char** ptr = &param[0];
+    init_dialog(stdin, stdout);
+    dialog_vars.input_result = NULL;
+	dialog_menu("outPatient List Menu", "Select an entry to delete.", 100, 100, 50, docno, ptr);
+	end_dialog();
+	int del_rank = stoi(dialog_vars.input_result);
+	H1.out_pt.erase(H1.out_pt.begin()+del_rank);
+	main_menu();
 }

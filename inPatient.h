@@ -1,4 +1,5 @@
 #pragma once
+#include <dialog.h>
 #include "./person.h"
 #include "./date.h"
 #include "./bed.h"
@@ -30,7 +31,19 @@ public:
 	void set_bed_serial(string serial){
 		bed_serial = serial;
 	}
-// make destructor delete pointers of "private:" !!
+//DESTRUCTOR:
+	~inPatient(){/*
+		delete adm_date;
+		delete dis_date;
+		delete bed;
+		delete account;
+		string recap = "Destructor Has Finished";
+	init_dialog(stdin, stdout);
+	dialog_msgbox("Patient REMOVE", &recap[0], 100, 100, 1);
+	dialog_vars.input_result = NULL;
+	end_dialog();*/
+	}
+	
 
 };
 #endif
