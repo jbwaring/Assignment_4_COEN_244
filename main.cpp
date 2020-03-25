@@ -1,3 +1,8 @@
+/* ASSIGNMENT 4 - COEN 244
+Jean-Baptiste WARING 40054925 
+FAROUQ HAMEDALLAH	 40087448
+HOSPITAL MANAGEMENT SYSTEM
+*/
 #include <dialog.h>
 #include <iostream>
 #include <string>
@@ -590,7 +595,7 @@ string sin = dialog_vars.input_result;
 string cond = dialog_vars.input_result;
  	end_dialog();
 
- 	dialog_inputbox("New inPatient", "Enter Service\n 1-ER\n 2-Pediatry tbf", 0, 0,NULL , 0);
+ 	dialog_inputbox("New inPatient", "Enter Service\n 0-ER\n 1-Surgery\n 2-Short-Term \n 3-Radiology \n 4-Lab\n 5-Blood", 0, 0,NULL , 0);
 string serv = dialog_vars.input_result;
  	end_dialog();
 

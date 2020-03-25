@@ -1,3 +1,7 @@
+/* ASSIGNMENT 4 - COEN 244
+Jean-Baptiste WARING 40054925 
+HOSPITAL MANAGEMENT SYSTEM
+*/
 // JB's C++ Functions Library //
 
 void println(string i){

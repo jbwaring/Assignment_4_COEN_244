@@ -1,3 +1,8 @@
+/* ASSIGNMENT 4 - COEN 244
+Jean-Baptiste WARING 40054925 
+FAROUQ HAMEDALLAH	 40087448
+HOSPITAL MANAGEMENT SYSTEM
+*/
 #include "./time.h"
 	Time::Time(){
 		time_array[0]=0;
